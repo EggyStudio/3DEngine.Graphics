@@ -70,15 +70,15 @@ public sealed unsafe partial class GraphicsDevice
         _deviceApi.vkCreateDescriptorSetLayout(&layoutInfo, null, out _cameraSetLayout).CheckResult();
         Logger.Debug("Descriptor set layout created.");
 
-        Logger.Debug("Creating descriptor pool (256 UBOs + 256 samplers, maxSets=256)...");
+        Logger.Debug("Creating descriptor pool (4096 UBOs + 4096 samplers, maxSets=4096)...");
         VkDescriptorPoolSize* poolSizes = stackalloc VkDescriptorPoolSize[2];
-        poolSizes[0] = new VkDescriptorPoolSize(VkDescriptorType.UniformBuffer, 256);
-        poolSizes[1] = new VkDescriptorPoolSize(VkDescriptorType.CombinedImageSampler, 256);
+        poolSizes[0] = new VkDescriptorPoolSize(VkDescriptorType.UniformBuffer, 4096);
+        poolSizes[1] = new VkDescriptorPoolSize(VkDescriptorType.CombinedImageSampler, 4096);
 
         VkDescriptorPoolCreateInfo poolInfo = new()
         {
             flags = VkDescriptorPoolCreateFlags.FreeDescriptorSet,
-            maxSets = 256,
+            maxSets = 4096,
             poolSizeCount = 2,
             pPoolSizes = poolSizes
         };
